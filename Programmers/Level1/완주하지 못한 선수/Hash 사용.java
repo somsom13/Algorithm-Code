@@ -14,8 +14,8 @@ class Solution {
         for(String comp:completion)
             map.put(comp,map.get(comp)-1); //완주한 선수이름 (key)에 대해 value를 -1 해준다. 
             // 동명이인이 없는 경우: 완주했을 때 -> 1-1=0, 완주하지 못했을 때 -> 1
-            // 동명이인이 n명 있는 경우: 완주한 사람이 m명이라 하면 
-            // 모두 다 완주했을 때 -> m=n이므로 n-n=0, 한 명이 완주하지 못했을 때 -> m=n-1 이므로 n-n+1=1
+            // 동명이인이 n명 있는 경우: 동명이인들 중 완주한 사람이 m명이라 하면 
+            // 해당 동명이인이 모두 다 완주했을 때 -> m=n이므로 value의 최종값: n-n=0, 동명이인들 중 한 명이 완주하지 못했을 때 -> m=n-1 이므로 value의 최종값: n-(n-1)=1
 
         for(String st:map.keySet())
             if(map.get(st)==1){//value가 1이면 완주하지 못한 선수
