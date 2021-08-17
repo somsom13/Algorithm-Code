@@ -13,7 +13,7 @@ class Solution {
         thisMove=moves[value]는 크레인의 입장에서 "어떤 열로 집게를 넣었는지"를 알려준다.
         즉 thisMove=col
 
-        그래서 board의 값의 접근할 때 board[moves[value],j(0~board.length(=세로 한 줄의 크기, 즉 행의 갯수))]
+        그래서 board의 값의 접근할 때 board[j(0~board.length(=세로 한 줄의 크기, 즉 행의 갯수)),moves[value]]
         로 접근해야 한다. 
         열은 고정된 값을 사용하지만 (집게는 하나의 열 안에서 이동하므로), 행은 0번부터 board.length-1(맨 마지막 칸) 까지 돌아야하기 때문! 
         
