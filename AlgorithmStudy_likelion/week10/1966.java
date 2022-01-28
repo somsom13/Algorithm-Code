@@ -25,36 +25,37 @@ public class Main {
             int len=Integer.parseInt(numsAndTarget[0]); //문서 개수
             int needIdx=Integer.parseInt(numsAndTarget[1]); //체크 대상 문서 인덱스
 
-            queue=new LinkedList<>();
-            priorities=new PriorityQueue<>(Collections.reverseOrder());
+            queue=new LinkedList<>();  //[각 문서의 원래 인덱스, 우선순위] 가 들어간 큐
+            priorities=new PriorityQueue<>(Collections.reverseOrder()); //우선순위를 내림차순으로 저장할 큐
 
-            // [원래 인덱스, 우선순위]
+           
             int[] s;
             String[] inputs=br.readLine().split(" "); // inputs에 우선순위 순서대로 입력받음
             for(int j=0;j<len;j++){
-                s=new int[2];
+                s=new int[2]; // [원래 인덱스, 우선순위]
                 s[0]=j;
                 s[1]=Integer.parseInt(inputs[j]);
-                priorities.add(s[1]);
+                priorities.add(s[1]); //우선순위를 내림차순으로 저장
                 queue.add(s);
             }
 
 
-            int count=0;
-            int maxVal=0;
+            int count=0; //지금까지 문서가 몇개나 출력되었는가
+            int maxVal=0; //가장 우선순위가 큰 거 저장할 변수
             if(!priorities.isEmpty()){
-                maxVal=priorities.peek();
+                maxVal=priorities.peek(); //일단 맨 처음에 가장 큰 우선순위 세팅
             }
             
             while(!queue.isEmpty()){
                 int[] current=queue.poll();
                 if(current[1]==maxVal){ //우선순위가 가장 크면? -> 바로 출력
                     count++;
-                    if(current[0]==needIdx){ //출력한 애가 원하는 애랑 같으면? -> 비교 멈춤
+                    if(current[0]==needIdx){ //출력한 애가 원하는 애 (체크 대상)랑 같으면? -> 비교 멈춤
                         break;
                     }
 
-                    priorities.poll(); // 출력한 문서는 대기열에서 삭제
+                    //출력한 애가 체크 대상이 아니라면 (더 출력해야 한다면)
+                    priorities.poll(); // 최고 우선순위를 갱신하기 위해 방금 뽑은 애의 우선순위를 제거
                     if(!priorities.isEmpty()){   
                         maxVal=priorities.peek(); //최고 우선순위 갱신
                     }
