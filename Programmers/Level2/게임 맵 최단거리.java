@@ -4,6 +4,8 @@ import java.util.LinkedList;
 class Solution {
     private static Queue<int[]> queue=new LinkedList<>();
     private static int count=-1;
+    private static int[] dx={-1,1,0,0};
+    private static int[] dy={0,0,-1,1}; //순서대로 상,하,좌,우
     public int solution(int[][] maps) {
         //막힌 칸과 뚫린 칸을 생각해서 이동하는 문제 + 최단경로 => BFS (같은 거리의 칸을 모두 서치 -> 다음 거리의 칸으로! 
         //그렇게 하다가 최종적으로 가장 먼저 종점에 도착했을 때의 경로가 최단경로임)
@@ -34,7 +36,7 @@ class Solution {
                 continue;
             }
             
-            //방문할 수 있는 칸을 탐색 시작할 것이므로 방문 처리
+            //이번 칸은 방문, 0으로 변경해서 방문처리 (0은 막힌 칸이므로 동일하게 취급해도 됨)
             maps[x][y]=0;
             
             if(x==n&&y==m){
@@ -43,16 +45,10 @@ class Solution {
             }
             
             //이동 가능 위치: 상,하,좌,우
-            int[] b1={x,y+1,moveCount+1};
-            int[] b2={x,y-1,moveCount+1};
-            int[] b3={x-1,y,moveCount+1};
-            int[] b4={x+1,y,moveCount+1};
-            
+            for(int i=0;i<4;i++){
+                queue.offer(new int[]{x+dx[i],y+dy[i],moveCount+1});
+            }
             //bfs이므로 현재 칸에서 갈 수 있는 다음 모든 칸을 다 큐에 넣는다!
-            queue.offer(b1);
-            queue.offer(b2);
-            queue.offer(b3);
-            queue.offer(b4);
             
         }
     }
